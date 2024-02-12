@@ -1,0 +1,89 @@
+ [
+      {
+        "label": "Users",
+        "icon": "chevron-down",
+        "expanded": true,
+        "children": [
+          {
+            "label": "Admin",
+            "icon": "chevron-down",
+            "expanded": false,
+            "children": [
+              {
+                "label": "Documents",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Downloads",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Pictures",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Videos",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              }
+            ]
+          },
+          {
+            "label": "Guest",
+            "icon": "chevron-down",
+            "expanded": false,
+            "children": [
+              {
+                "label": "Documents",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Downloads",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Pictures",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              },
+              {
+                "label": "Videos",
+                "type": "dir",
+                "icon": "chevron-right",
+                "expanded": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Program Files",
+        "type": "dir",
+        "icon": "chevron-right",
+        "expanded": false
+      },
+      {
+        "label": "Program Files (x86)",
+        "type": "dir",
+        "icon": "chevron-right",
+        "expanded": false
+      },
+      {
+        "label": "Windows",
+        "type": "dir",
+        "icon": "chevron-right",
+        "expanded": false
+      } 
+]

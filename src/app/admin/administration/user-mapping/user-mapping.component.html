@@ -1,0 +1,301 @@
+<section class="ejob-section" >
+	<ng-scrollbar class="w-100 h-100">
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+          <form class="row g-3 datasearch" (ngSubmit)="onSubmit()">
+          <div class="col-md-6 ">
+              <label class="mb-1">{{ 'User' | translate }}</label>
+              <select class="form-select"  [(ngModel)]="userMappingData.userId" name="userId"
+              [ngClass]="{ 'is-invalid': submitted && f['userId'].errors }">
+              <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+              <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+              </select>
+              <div *ngIf="submitted && f['userId'].errors" class="invalid-feedback">
+              <div *ngIf="f['userId'].errors['required']">
+                Select the User is required
+              </div>
+              </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <label class="mb-1">{{ 'Top Org Unit' | translate }} </label>
+            <select class="form-select" [(ngModel)]="userMappingData.orgTypeId" name="orgTypeId"
+            [ngClass]="{ 'is-invalid': submitted && f['orgTypeId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option value="{{web.orgId}}" *ngFor="let web of topOrgUnitData">{{web.orgName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['orgTypeId'].errors" class="invalid-feedback">
+            <div *ngIf="f['orgTypeId'].errors['required']">
+              Top Org Unit is required
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <label class="mb-1">{{ 'Org Unit' | translate }}</label>
+            <select class="form-select" [(ngModel)]="userMappingData.orgId" name="orgId"
+            [ngClass]="{ 'is-invalid': submitted && f['orgId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option  value="{{web.orgId}}" *ngFor="let web of orgNameData">{{web.orgName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['orgId'].errors" class="invalid-feedback">
+            <div *ngIf="f['orgId'].errors['required']">
+              Org Unit is required
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <label class="mb-1">{{ 'Role' | translate }}</label>
+            <select class="form-select" [(ngModel)]="userMappingData.roleId" name="roleId"
+            [ngClass]="{ 'is-invalid': submitted && f['roleId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option value="{{web.roleId}}" *ngFor="let web of roleData">{{web.roleName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['roleId'].errors" class="invalid-feedback">
+            <div *ngIf="f['roleId'].errors['required']">
+              Role is required
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <label class="mb-1">{{ 'Superior' | translate }}</label>
+            <select class="form-select" [(ngModel)]="userMappingData.superiorUserId" 
+            name="superiorUserId"
+            [ngClass]="{ 'is-invalid': submitted && f['superiorUserId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['superiorUserId'].errors" class="invalid-feedback">
+            <div *ngIf="f['superiorUserId'].errors['required']">
+              Superior is required
+            </div>
+            </div>
+          </div>
+      
+          <div class="col-md-6">
+              <label class="mb-1">{{ 'User Assignment Permission' | translate }}</label>
+              <select class="form-select"  
+              [(ngModel)]="userMappingData.assignId" name="assignId"
+            [ngClass]="{ 'is-invalid': submitted && f['assignId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option value="{{web.assignId}}" *ngFor="let web of assignPermData">{{web.assignPermName}}</option> 
+            </select>
+              <div *ngIf="submitted && f['assignId'].errors" class="invalid-feedback">
+              <div *ngIf="f['assignId'].errors['required']">
+                User Assignment Permission is required
+              </div>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="mb-1">{{ 'User Privileges' | translate }}</label>
+            <ng-select [multiple]="true"
+            [(ngModel)]="userMappingData.privilegeId" name="privilegeId"
+            [ngClass]="{ 'is-invalid': submitted && f['privilegeId'].errors }">
+            <ng-option value="" disabled>Choose Your Option</ng-option>
+            <ng-option [value]="web.privilegeId" *ngFor="let web of privilegeData">{{web.privilegeName}}</ng-option> 
+            </ng-select>
+            <div *ngIf="submitted && f['privilegeId'].errors" class="invalid-feedback">
+            <div *ngIf="f['privilegeId'].errors['required']">
+              User Privilges is required
+            </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-md-6">
+          <label class="mb-1">User Actions</label>
+          <input
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+          />
+          <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+          <div *ngIf="f['lastName'].errors['required']">
+            Last Name is required
+          </div>
+          </div>
+      </div> -->
+      <div class="row btn-row justify-content-center">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn-submit mx-2">{{ 'Submit' | translate }}</button>
+          <button type="button" class="btn-danger mx-2" (click)="onReset()">{{ 'Reset' | translate }}</button>
+        </div>
+      </div>                    
+          </form>
+        </div>
+        </div>  
+          <hr class="gradient-line">
+
+    <div class="row m-0 p-0 data">
+      <div class=" table-result p-0 ">
+          <ng-scrollbar class="table-height" style="height: 59vh;">
+          <ngx-table class="w-100" [configuration]="configuration" [data]="data" [columns]="columns" > 
+              <ng-template let-row let-index="index">
+  
+                <td>
+                  <span class="">{{ row.indexvalue }}</span>
+                </td>
+                <td>
+                  <div class="">{{ row.userName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.orgName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.roleName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.superiorUserName }}</div>
+                </td>
+                <td>
+                  <div  *ngIf="row.status === 1" class="">Active</div>
+                  <div  *ngIf="row.status === 0" class="">In Active</div>
+                </td>
+                <td>
+                  <div class="">{{ row.createdByUserName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.createdDate }}</div>
+                </td>
+                <td>
+                  <button class="btn table-btn btn-edit" (click)="openModal(content, row)">Edit</button>
+                </td> 
+              </ng-template>
+            </ngx-table>
+              
+            </ng-scrollbar>
+       
+    
+      </div>
+    </div>
+    
+
+
+    </ng-scrollbar>
+</section>
+  
+
+  <!-- <app-table></app-table> -->
+
+  <ng-template #content let-modal>
+    <div class="modal-header justify-content-center">
+      <h4 class="modal-title" id="modal-basic-title"> update</h4>      
+    </div>
+    <div class="modal-body ">
+      <form [formGroup]="editData" (ngSubmit)="onEdit()">
+        <div class="p-2 row">
+          <label class="mb-1">User</label>
+          <select class="form-select" formControlName="userId"
+          [ngClass]="{ 'is-invalid': submitted && f['userId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['userId'].errors" class="invalid-feedback">
+          <div *ngIf="f['userId'].errors['required']">
+            Select the User is required
+          </div>
+          </div>
+        </div>
+    
+        <div class="p-2 row">
+          <label class="mb-1">Top Org Unit </label>
+          <select class="form-select" formControlName="orgTypeId"
+          [ngClass]="{ 'is-invalid': submitted && f['orgTypeId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.orgId}}" *ngFor="let web of topOrgUnitData">{{web.orgName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['orgTypeId'].errors" class="invalid-feedback">
+          <div *ngIf="f['orgTypeId'].errors['required']">
+            Top Org Unit is required
+          </div>
+          </div>
+        </div>
+        <div class="p-2 row">
+          <label class="mb-1">Org Unit</label>
+          <select class="form-select" formControlName="orgId"
+          [ngClass]="{ 'is-invalid': submitted && f['orgId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option  value="{{web.orgId}}" *ngFor="let web of orgNameData">{{web.orgName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['orgId'].errors" class="invalid-feedback">
+          <div *ngIf="f['orgId'].errors['required']">
+            Org Unit is required
+          </div>
+          </div>
+        </div>
+        <div class="p-2 row">
+          <label class="mb-1">Role</label>
+            <select class="form-select" formControlName="roleId"
+            [ngClass]="{ 'is-invalid': submitted && f['roleId'].errors }">
+            <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+            <option value="{{web.roleId}}" *ngFor="let web of roleData">{{web.roleName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['roleId'].errors" class="invalid-feedback">
+            <div *ngIf="f['roleId'].errors['required']">
+              Role is required
+            </div>
+            </div>
+        </div>
+        <div class="p-2 row">
+          <label class="mb-1">Superior</label>
+          <select class="form-select" formControlName="superiorUserId"
+          [ngClass]="{ 'is-invalid': submitted && f['superiorUserId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['superiorUserId'].errors" class="invalid-feedback">
+          <div *ngIf="f['superiorUserId'].errors['required']">
+            Superior is required
+          </div>
+          </div>
+        </div>
+        <div class="p-2 row">
+        <label class="mb-1">User Assignment Permission</label>
+        <select class="form-select" formControlName="assignId"
+      [ngClass]="{ 'is-invalid': submitted && f['assignId'].errors }">
+      <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+      <option value="{{web.assignId}}" *ngFor="let web of assignPermData">{{web.assignPermName}}</option> 
+      </select>
+        <div *ngIf="submitted && f['assignId'].errors" class="invalid-feedback">
+        <div *ngIf="f['assignId'].errors['required']">
+          User Assignment Permission is required
+        </div>
+        </div>
+        </div>
+        <div class="p-2 ng-select">
+          <label class="mb-1">User Privileges</label>
+            <ng-select [multiple]="true" [(ngModel)]="userMappingData.privilegeId" name="privilegeId" formControlName="privilegeId"
+            [ngClass]="{ 'is-invalid': submitted && f['privilegeId'].errors }" bindLabel="name">
+            <ng-option value="" disabled>Choose Your Option</ng-option>
+            <ng-option [value]="web.privilegeId" *ngFor="let web of privilegeData">{{web.privilegeName}}</ng-option> 
+            </ng-select>
+            <div *ngIf="submitted && f['privilegeId'].errors" class="invalid-feedback">
+            <div *ngIf="f['privilegeId'].errors['required']">
+              User Privileges is required
+            </div>
+            </div>
+        </div>
+        <div class="p-2 row">
+          <label class="p-0 mb-1">Status</label>
+          <select class="form-select" formControlName="status"
+          [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+            <option value="1">Active</option> 
+            <option  value="0">In Active</option> 
+          </select>
+      </div>
+        <div class="p-2 row">
+          <input 
+          type="hidden"
+          formControlName="indexvalue"
+          class="form-control">
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer mb-2 justify-content-center">
+      <button type="button" class="btn btn-update mx-2" (click)="onUpdate()">Update</button>
+      <button type="button" class="btn btn-danger mx-2" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>

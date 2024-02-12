@@ -1,0 +1,332 @@
+
+
+<section class="ejob-section" >
+	<ng-scrollbar class="w-100 h-100">
+
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+          <form class="row g-3 datasearch " [formGroup]="form" (ngSubmit)="onSubmit()">
+            
+          <div class="col-md-6 ">
+              <label class="mb-1">{{ 'Login Id' | translate }}</label>
+              <input
+              type="text"
+              formControlName="loginId"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['loginId'].errors }"
+              />
+              <div *ngIf="submitted && f['loginId'].errors" class="invalid-feedback">
+              <div *ngIf="f['loginId'].errors['required']">
+                Login Id is required
+              </div>
+              </div>
+          </div>
+      
+          <div class="col-md-6">
+              <label class="mb-1">{{ 'Display Name' | translate }}</label>
+              <input
+              type="text"
+              formControlName="displayName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['displayName'].errors }"
+              />
+              <div *ngIf="submitted && f['displayName'].errors" class="invalid-feedback">
+              <div *ngIf="f['displayName'].errors['required']">
+                Display Name is required
+              </div>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="mb-1">{{ 'First Name' | translate }}</label>
+            <input
+            type="text"
+            formControlName="firstName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+            />
+            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+            <div *ngIf="f['firstName'].errors['required']">
+              First Name is required
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="mb-1">{{ 'Last Name' | translate }}</label>
+          <input
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+          />
+          <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+          <div *ngIf="f['lastName'].errors['required']">
+            Last Name is required
+          </div>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="mb-1">{{ 'Ldap Identifier' | translate }}</label>
+        <input
+        type="text"
+        formControlName="ldapIdentifier"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['ldapIdentifier'].errors }"
+        />
+        <div *ngIf="submitted && f['ldapIdentifier'].errors" class="invalid-feedback">
+        <div *ngIf="f['ldapIdentifier'].errors['required']">
+          Ldap Identifier is required
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="mb-1">{{ 'Hired Date' | translate }}</label>
+      <input type="date"
+      class="form-control"
+      placeholder="yyyy-mm-dd"
+      name="dp"
+      formControlName="hiredDate"
+    />
+    <!-- <button class="btn btn-outline-secondary" (click)="b.toggle()" type="button"><svg class="icon" ><use xlink:href="#calendar" /></svg></button> -->
+      <div *ngIf="submitted && f['hiredDate'].errors" class="invalid-feedback">
+      <div *ngIf="f['hiredDate'].errors['required']">
+        Hired Date is required
+      </div>
+      </div>
+    </div>
+
+
+      <div class="col-md-6">
+        <label class="mb-1">{{ 'Date of Birth' | translate }}</label>
+        <div class="input-group">
+          <input type="date"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="dob"
+          />
+          <!-- <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><svg class="icon" ><use xlink:href="#calendar" /></svg></button> -->
+        </div>
+
+        <!-- <input
+        type="text"
+        formControlName="dob"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['dob'].errors }"
+        />
+        <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
+        <div *ngIf="f['dob'].errors['required']">
+          Date of Birth is required
+        </div>
+        </div> -->
+    </div>
+
+    <div class="col-md-6">
+      <label class="mb-1">{{ 'Designation' | translate }}</label>
+      <input
+      type="text"
+      formControlName="designation"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['designation'].errors }"
+      />
+      <div *ngIf="submitted && f['designation'].errors" class="invalid-feedback">
+      <div *ngIf="f['designation'].errors['required']">
+        Designation is required
+      </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="mb-1">{{ 'user Id' | translate }}</label>
+      <input
+      type="text"
+      formControlName="userId"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['userId'].errors }"
+      />
+      <div *ngIf="submitted && f['userId'].errors" class="invalid-feedback">
+      <div *ngIf="f['userId'].errors['required']">
+        User Id is required
+      </div>
+      </div>
+    </div>
+
+    <div class="row btn-row justify-content-center">
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn-submit mx-2">{{ 'Submit' | translate }}</button>
+        <button type="button" class="btn-danger mx-2" (click)="onReset()">{{ 'Reset' | translate }}</button>
+      </div>
+    </div>  
+       
+          
+          </form>
+        </div>
+        </div>
+  
+          <hr class="gradient-line">
+
+    <div class="row m-0 p-0 data">
+      <div class=" table-result p-0 ">
+          <ng-scrollbar class="table-height" style="height: 59vh;">
+          <ngx-table [configuration]="configuration" [data]="data" [columns]="columns" > 
+              <ng-template let-row let-index="index">
+  
+                <td>
+                  <span class="">{{ row.indexvalue }}</span>
+                </td>
+                <td>
+                  <div class="">{{ row.displayName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.ldapIdentifier }}</div>
+                </td>
+                <td>
+                  <div  *ngIf="row.status === 1" class="">Active</div>
+                  <div  *ngIf="row.status === 0" class="">In Active</div>
+                </td>
+                <td>
+                  <div class="">{{ row.designation }}</div>
+                </td>
+                <td>
+                  <button class="btn table-btn btn-edit" (click)="openModal(content, row)">Edit</button>
+                </td>
+              </ng-template>
+            </ngx-table>
+              
+            </ng-scrollbar>
+       
+    
+      </div>
+    </div>
+    
+
+
+    </ng-scrollbar>
+</section>
+  
+
+  <!-- <app-table></app-table> -->
+  <ng-template #content let-modal>
+    <div class="modal-header justify-content-center">
+      <h4 class="modal-title" id="modal-basic-title"> update</h4>
+      
+    </div>
+    <div class="modal-body ">
+      <form [formGroup]="editData" (ngSubmit)="onEdit()">
+        <div class="p-2 row">
+            <label class="p-0 mb-1">Display Name</label>
+            <input 
+            type="text"
+            formControlName="displayName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['displayName'].errors }"/>
+            <div *ngIf="submitted && f['displayName'].errors" class="invalid-feedback">
+            <div *ngIf="f['displayName'].errors['required']">
+              Display Name is required
+            </div>
+            </div>
+        </div>
+    
+        <div class="p-2 row">
+            <label class="p-0 mb-1">Designation</label>
+            <input
+            type="text"
+            formControlName="designation"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['designation'].errors }"/>
+            <div *ngIf="submitted && f['designation'].errors" class="invalid-feedback">
+            <div *ngIf="f['designation'].errors['required']">
+              Designation is required
+            </div>
+            </div>
+        </div>
+        <div class="p-2 row">        
+          <label class="mb-1">{{ 'First Name' | translate }}</label>
+            <input
+            type="text"
+            formControlName="firstName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+            />
+            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+            <div *ngIf="f['firstName'].errors['required']">
+              First Name is required
+            </div>
+            </div>
+          </div>
+          <div class="p-2 row">
+            <label class="mb-1">{{ 'Last Name' | translate }}</label>
+            <input
+            type="text"
+            formControlName="lastName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+            />
+            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+            <div *ngIf="f['lastName'].errors['required']">
+              Last Name is required
+            </div>
+            </div>
+          </div>
+          <div class="p-2 row">
+            <label class="mb-1">{{ 'Ldap Identifier' | translate }}</label>
+            <input
+            type="text"
+            formControlName="ldapIdentifier"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['ldapIdentifier'].errors }"
+            />
+            <div *ngIf="submitted && f['ldapIdentifier'].errors" class="invalid-feedback">
+            <div *ngIf="f['ldapIdentifier'].errors['required']">
+              Ldap Identifier is required
+            </div>
+            </div>
+          </div>
+          <div class="p-2 row">
+            <label class="mb-1">{{ 'Hired Date' | translate }}</label>
+            <input type="date"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="hiredDate"/>
+            <div *ngIf="submitted && f['hiredDate'].errors" class="invalid-feedback">
+            <div *ngIf="f['hiredDate'].errors['required']">
+              Hired Date is required
+            </div>
+            </div>
+          </div>
+          <div class="p-2 row">
+            <label class="mb-1">{{ 'Date of Birth' | translate }}</label>
+            <div class="input-group">
+              <input type="date"
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                formControlName="dob"/>           
+            </div>
+          </div>
+        <div class="p-2 row">
+          <label class="p-0 mb-1">Status</label>
+          <select class="form-select" formControlName="status"
+          [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+            <option value="1">Active</option> 
+            <option  value="0">In Active</option> 
+          </select>
+      </div>
+        <div class="p-2 row">
+          <input 
+          type="hidden"
+          formControlName="indexvalue"
+          class="form-control">
+          </div>
+          <pre>{{ selected }}</pre>    
+      </form>
+    </div>
+    <div class="modal-footer mb-2 justify-content-center">
+      <button type="button" class="btn btn-update mx-2" (click)="onUpdate()">Update</button>
+      <button type="button" class="btn btn-danger mx-2" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>

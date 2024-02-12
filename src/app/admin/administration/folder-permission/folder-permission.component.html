@@ -1,0 +1,229 @@
+
+
+<section class="ejob-section" >
+	<ng-scrollbar class="w-100 h-100">
+
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+          <form class="row g-3 datasearch justify-content-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="col-md-6 ">
+              <label class="mb-1">Folder </label>
+              <select class="form-select" formControlName="folderId"
+              [ngClass]="{ 'is-invalid': submitted && f['folderId'].errors }">
+              <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+              <option value="{{web.folderId}}" *ngFor="let web of folderData">{{web.folderName}}</option> 
+              </select>
+              <div *ngIf="submitted && f['folderId'].errors" class="invalid-feedback">
+              <div *ngIf="f['folderId'].errors['required']">
+                Folder is required
+              </div>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="mb-1">Permission Type </label>
+            <select class="form-select" formControlName="permissionType" (change)="myFunction()"
+            [ngClass]="{ 'is-invalid': submitted && f['permissionType'].errors }">
+              <option disabled [defaultSelected]="true">Choose Your Option</option>
+              <option [value]="'User'">User</option>
+              <option  [value]="'topOrgUnit'">Top Org Unit</option>
+              <option [value]="'orgUnit'">Org Unit</option>    
+            </select>
+            <div *ngIf="submitted && f['permissionType'].errors" class="invalid-feedback">
+            <div *ngIf="f['permissionType'].errors['required']">
+              Folder is required
+            </div>
+            </div>
+          </div>
+
+          <div  *ngIf="selectedFolder === 'User'" class="col-md-6">
+            <label class="mb-1">User</label>
+            <select class="form-select" formControlName="dataId"
+            [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+              <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+              <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+            <div *ngIf="f['dataId'].errors['required']">
+              Folder is required
+            </div>
+            </div>
+        </div>
+        <div *ngIf="selectedFolder === 'topOrgUnit'" class="col-md-6">
+          <label class="mb-1">Top Org Unit</label>
+          <select class="form-select" formControlName="dataId"
+          [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.orgTypeId}}" *ngFor="let web of orgTypeData">{{web.orgTypeName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+          <div *ngIf="f['dataId'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedFolder === 'orgUnit'" class="col-md-6">
+          <label class="mb-1">Org Unit</label>
+          <select class="form-select" formControlName="dataId"
+          [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.orgId}}" *ngFor="let web of orgNameData">{{web.orgName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+          <div *ngIf="f['dataId'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>    
+
+        <div class="row btn-row justify-content-center">
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn-submit mx-2">Submit</button>
+            <button type="button" class="btn-danger mx-2" (click)="onReset()">Reset</button>
+          </div>
+        </div>                    
+          </form>
+        </div>
+        </div>
+        
+  
+  <hr class="gradient-line">
+    <div class="row m-0 p-0 data">
+      <div class=" table-result p-0 ">
+          <ng-scrollbar class="table-height" style="height: 59vh;">
+          <ngx-table [configuration]="configuration" [data]="data" [columns]="columns" > 
+              <ng-template let-row let-index="index">
+  
+                <td>
+                  <span class="">{{ row.indexvalue }}</span>
+                </td>
+                <td>
+                  <div class="">{{ row.folderName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.folderNameAr }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.permissionType }}</div>
+                </td>
+                <td>
+                  <div  *ngIf="row.status === 1" class="">Active</div>
+                  <div  *ngIf="row.status === 0" class="">In Active</div>
+                </td>
+                <td>
+                  <div class="">{{ row.createdByUserName }}</div>
+                </td>
+                <td>
+                  <div class="">{{ row.createdDate }}</div>
+                </td>
+                <td>
+                  <button class="btn table-btn btn-edit" (click)="openModal(content, row)">Edit</button>
+                </td>   
+              </ng-template>
+            </ngx-table>              
+            </ng-scrollbar>           
+      </div>
+    </div>
+    </ng-scrollbar>
+</section>
+  
+
+  <!-- <app-table></app-table> -->
+  <ng-template #content let-modal>
+    <div class="modal-header justify-content-center">
+      <h4 class="modal-title" id="modal-basic-title">update</h4>      
+    </div>
+    <div class="modal-body ">
+      <form [formGroup]="editData" (ngSubmit)="onEdit()">
+        <div class="p-2 row">
+          <label class="mb-1">Folder </label>
+          <select class="form-select" formControlName="folderId"
+          [ngClass]="{ 'is-invalid': submitted && f['folderId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.folderId}}" *ngFor="let web of folderData">{{web.folderName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['folderId'].errors" class="invalid-feedback">
+          <div *ngIf="f['folderId'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>
+    
+        <div class="p-2 row">
+          <label class="mb-1">Permission Type </label>
+          <select class="form-select" formControlName="permissionType" (change)="myEditFunction()"
+          [ngClass]="{ 'is-invalid': submitted && f['permissionType'].errors }">
+            <option disabled [defaultSelected]="true">Choose Your Option</option>
+            <option [value]="'User'">User</option>
+            <option  [value]="'topOrgUnit'">Top Org Unit</option>
+            <option [value]="'orgUnit'">Org Unit</option>    
+          </select>
+          <div *ngIf="submitted && f['permissionType'].errors" class="invalid-feedback">
+          <div *ngIf="f['permissionType'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>
+        <div *ngIf="selectedFolder === 'User'" class="p-2 row">
+          <label class="mb-1">User</label>
+            <select class="form-select" formControlName="dataId"
+            [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+              <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+              <option value="{{web.indexvalue}}" *ngFor="let web of userData">{{web.displayName}}</option> 
+            </select>
+            <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+            <div *ngIf="f['dataId'].errors['required']">
+              Folder is required
+            </div>
+            </div>
+        </div>
+        <div *ngIf="selectedFolder === 'topOrgUnit'" class="p-2 row">
+          <label class="mb-1">Top Org Unit</label>
+          <select class="form-select" formControlName="dataId"
+          [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.orgTypeId}}" *ngFor="let web of orgTypeData">{{web.orgTypeName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+          <div *ngIf="f['dataId'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedFolder === 'orgUnit'" class="p-2 row">
+          <label class="mb-1">Org Unit</label>
+          <select class="form-select" formControlName="dataId"
+          [ngClass]="{ 'is-invalid': submitted && f['dataId'].errors }">
+          <option value="" disabled [defaultSelected]="true">Choose Your Option</option>
+          <option value="{{web.orgId}}" *ngFor="let web of orgNameData">{{web.orgName}}</option> 
+          </select>
+          <div *ngIf="submitted && f['dataId'].errors" class="invalid-feedback">
+          <div *ngIf="f['dataId'].errors['required']">
+            Folder is required
+          </div>
+          </div>
+        </div>   
+        <div class="p-2 row">
+          <label class="p-0 mb-1">Status</label>
+          <select class="form-select" formControlName="status"
+          [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+            <option value="1">Active</option> 
+            <option  value="0">In Active</option> 
+          </select>
+      </div>
+        <div class="p-2 row">
+          <input 
+          type="hidden"
+          formControlName="indexvalue"
+          class="form-control">
+          </div>
+          <pre>{{ selected }}</pre>    
+      </form>
+    </div>
+    <div class="modal-footer mb-2 justify-content-center">
+      <button type="button" class="btn btn-update mx-2" (click)="onUpdate()">Update</button>
+      <button type="button" class="btn btn-danger mx-2" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>
